@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/TextPlugin.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <title>PIXEL OS</title>
+    <style>
+        /* Adicionando a fonte como global */
+        body {
+            overflow-x: hidden;
+            font-family: InterVariable, sans-serif;
+        }
+
+        body {
+            --sb-track-color: #1f1c15;
+            --sb-thumb-color: #fff8e1;
+            --sb-size: 10px;
+        }
+
+        body::-webkit-scrollbar {
+            width: var(--sb-size)
+        }
+
+        body::-webkit-scrollbar-track {
+            background: var(--sb-track-color);
+            border-radius: 11px;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background: var(--sb-thumb-color);
+            border-radius: 11px;
+            border: 2px solid #1f1c15;
+        }
+
+        @supports not selector(::-webkit-scrollbar) {
+            body {
+                scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+            }
+        }
+
+        body {
+            --sb-track-color: #1f1c15;
+            --sb-thumb-color: #fff8e1;
+            --sb-size: 9px;
+        }
+
+        body::-webkit-scrollbar {
+            width: var(--sb-size)
+        }
+
+        body::-webkit-scrollbar-track {
+            background: var(--sb-track-color);
+            border-radius: 1px;
+        }
+
+        body::-webkit-scrollbar-thumb {
+            background: var(--sb-thumb-color);
+            border-radius: 1px;
+
+        }
+
+        @supports not selector(::-webkit-scrollbar) {
+            body {
+                scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+            }
+        }
+
+        .textprincipal {
+            opacity: 0;
+            /* Inicialmente invisível */
+            transform: translateY(-70px);
+            /* Inicialmente fora de vista (acima) */
+        }
+
+        .paragrafo {
+            opacity: 0;
+            /* Inicialmente invisível */
+            transform: translateY(70px);
+        }
+
+        .header {
+            opacity: 0;
+            /* Inicialmente invisível */
+
+            transform: translateY(-70px);
+        }
+
+        @keyframes borderExpand {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+
+            100% {
+                width: 100%;
+                opacity: 1;
+            }
+        }
+
+
+        li::after {
+            content: "";
+            display: block;
+            width: 0;
+            height: 2px;
+            background-color: #000;
+            transition: width 0.3s ease;
+            opacity: 0;
+        }
+
+
+        li:hover::after {
+            animation: borderExpand 0.3s forwards;
+            opacity: 1;
+        }
+
+
+
+        /* Para uma transição suave */
+        #mobile-menu {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .xv {
+
+            width: clamp(300px, 40vw, 550px);
+            height: clamp(300px, 40vw, 550px);
+            right: 0px;
+            z-index: -1;
+            opacity: 0;
+            position: absolute;
+            background: url(https://pixelos.net/Images/Shapes/Monetp-w.png) center center / contain no-repeat;
+            transform: translateX(60%) translateY(-22%) rotateZ(-10deg);
+            will-change: transform;
+            width: 400px;
+            height: 400px;
+            animation: 30s ease-in-out 2s infinite alternate none running monetW, 1.5s ease-in-out 1.75s 1 normal forwards running revealMonet;
+        }
+
+        .xv1 {
+            width: clamp(300px, 40vw, 550px);
+            height: clamp(300px, 40vw, 550px);
+            z-index: -1;
+            position: absolute;
+            background: url(https://pixelos.net/Images/Shapes/Monetp-y.png) center center / contain no-repeat;
+            transform: translateX(-45%) translateY(-45%) rotateZ(-25deg);
+            will-change: transform;
+            animation: 30s ease-in-out 2s infinite alternate none running monetY, 1.5s ease-in-out 1.75s 1 normal forwards running revealMonet;
+
+        }
+
+        .xv2 {
+            width: clamp(300px, 40vw, 550px);
+            height: clamp(300px, 40vw, 550px);
+            bottom: -200px;
+            right: 0px;
+            z-index: -1;
+            position: absolute;
+            background: url(https://pixelos.net/Images/Shapes/Monetp-t.png) center center / contain no-repeat;
+            transform: translateX(30%) translateY(30%) rotateZ(-10deg);
+            will-change: transform;
+
+            animation: 40s ease-in-out 2s infinite alternate none running monetT, 1.5s ease-in-out 1.75s 1 normal forwards running revealMonet;
+        }
+
+        .xv4 {
+
+            width: clamp(400px, 40vw, 550px);
+            height: clamp(400px, 40vw, 550px);
+            bottom: 0px;
+            left: 0px;
+            z-index: -1;
+            position: absolute;
+            background: url(https://pixelos.net/Images/Shapes/Monetp-b.png) center center / contain no-repeat;
+            transform: translateX(-45%) translateY(45%) rotateZ(-10deg);
+            will-change: transform;
+
+            animation: 30s ease-in-out 2s infinite alternate none running monetB, 1.5s ease-in-out 1.75s 1 normal forwards running revealMonet;
+        }
+    </style>
+</head>
+
+<body class="bg-[#fff8e1]">
+
+    <header class=" text-[#4a473e] p-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="text-lg font-bold flex items-center space-x-2">
+                <img src="https://pixelos.net/Images/logo.svg" alt="Logo" class="h-[45px] w-[45px]">
+                <a href="#" class="font-semibold text-xl">PixelOs</a>
+            </div>
+            <button id="menu-toggle" class="md:hidden focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+            </button>
+            <div class="xv paragrafo"></div>
+            <div class="xv1"></div>
+            <div class="xv2"></div>
+            <div class="xv4"></div>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-10">
+                    <li class="relative"><a href="#" class="font-semibold text-xl">About</a></li>
+                    <li class="relative"><a href="#" class="font-semibold text-xl">Team</a></li>
+                    <li class="relative"><a href="#" class="font-semibold text-xl">Download</a></li>
+                    <li class="relative"><a href="#" class="font-semibold text-xl">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Menu Mobile de Tela Cheia -->
+        <div id="mobile-menu" class="fixed inset-0 bg-[#fff8e1] z-50 hidden flex flex-col justify-center items-center">
+            <button id="close-menu" class="absolute top-5 right-5 text-gray-600 text-3xl">&times;</button>
+            <ul class="flex flex-col space-y-8">
+                <li class="relative"><a href="#" class="font-semibold text-3xl">About</a></li>
+                <li class="relative"><a href="#" class="font-semibold text-3xl">Team</a></li>
+                <li class="relative"><a href="#" class="font-semibold text-3xl">Download</a></li>
+                <li class="relative"><a href="#" class="font-semibold text-3xl">Blog</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Script para o Menu Mobile -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+    </script>
+
+
+
+    <main class="text-[#4a473e] ">
+        <section class="flex flex-col md:flex-row justify-center items-center p-4">
+            <div class="max-w-lg space-y-2 flex font-bold flex-col md:pb-28 ">
+                <h1 class="textprincipal text-4xl md:text-6xl text-[#1f1c15]">What is PixelOS</h1>
+                <p class="paragrafo text-sm  md:text-base">
+                    PixelOS is an AOSP based ROM, with Google apps included and all Pixel goodies. We aim to provide an
+                    experience similar to Google Pixel phones with numerous performance enhancements and a small amount
+                    of
+                    useful additional features.
+                </p>
+                <button class="paragrafo font-bold bg-[#fde694] text-[#1f1c15] w-full md:w-[200px] h-[50px] rounded-md">
+                    Get PixelOS
+                </button>
+            </div>
+            <div class="mt-6 md:mt-0">
+                <img src="https://pixelos.net/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FPixelFrame.73391084.webp&w=384&q=75"
+                    alt="PixelOS Image" class="paragrafo w-full max-w-xs">
+            </div>
+        </section>
+
+    </main>
+    <section>
+        <div class="flex justify-between container mx-auto p-8">
+            <div>
+                <h1 class="font-semibold text-xl">WebSite made by Tr1cksy</h1>
+            </div>
+            <div class="flex space-x-6 ">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1.75rem"
+                    width="1.75rem" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                    </path>
+                </svg>
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" height="1.75rem"
+                    width="1.75rem" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z">
+                    </path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.onload = function () {
+            gsap.to(".textprincipal", {
+                duration: 2,
+                opacity: 1,
+                y: 0,
+                ease: "power4.inOut"
+            });
+
+        }
+        gsap.to(".header", {
+            duration: 1,
+            opacity: 1,
+            y: 0,
+            ease: "power4.inOut"
+        });
+
+        {
+            gsap.to(".paragrafo", {
+                duration: 2,
+                opacity: 1,
+                y: 0,
+                ease: "power3.inOut"
+            });
+        };
+        gsap.timeline()
+            .to(".xv", {
+                opacity: 1,     // Aumenta a opacidade
+                duration: 0,     // Duração de 1 segundo
+                delay: 2,        // Aguarda 2 segundos antes de começar
+            })
+            .to(".xv", {
+                rotation: 360,   // Rotaciona 360 graus
+                duration: 50,    // Dura 30 segundos
+                ease: "none",    // Sem easing para rotação contínua
+                repeat: -1       // Repetir indefinidamente
+            });
+        gsap.timeline()
+            .to(".xv1", {
+                opacity: 1,     // Aumenta a opacidade
+                duration: 0,     // Duração de 1 segundo
+                delay: 2,        // Aguarda 2 segundos antes de começar
+            })
+            .to(".xv1", {
+                rotation: 360,   // Rotaciona 360 graus
+                duration: 50,    // Dura 30 segundos
+                ease: "none",    // Sem easing para rotação contínua
+                repeat: -1       // Repetir indefinidamente
+            });
+        gsap.timeline()
+            .to(".xv2", {
+                opacity: 1,     // Aumenta a opacidade
+                duration: 0,     // Duração de 1 segundo
+                delay: 2,        // Aguarda 2 segundos antes de começar
+            })
+            .to(".xv2", {
+                rotation: 360,   // Rotaciona 360 graus
+                duration: 50,    // Dura 30 segundos
+                ease: "none",    // Sem easing para rotação contínua
+                repeat: -1       // Repetir indefinidamente
+            });
+        gsap.timeline()
+            .to(".xv3", {
+                opacity: 1,     // Aumenta a opacidade
+                duration: 0,     // Duração de 1 segundo
+                delay: 2,        // Aguarda 2 segundos antes de começar
+            })
+            .to(".xv3", {
+                rotation: 360,   // Rotaciona 360 graus
+                duration: 50,    // Dura 30 segundos
+                ease: "none",    // Sem easing para rotação contínua
+                repeat: -1       // Repetir indefinidamente
+            });
+        gsap.timeline()
+            .to(".xv4", {
+                opacity: 1,     // Aumenta a opacidade
+                duration: 0,     // Duração de 1 segundo
+                delay: 2,        // Aguarda 2 segundos antes de começar
+            })
+            .to(".xv4", {
+                rotation: 360,   // Rotaciona 360 graus
+                duration: 50,    // Dura 30 segundos
+                ease: "none",    // Sem easing para rotação contínua
+                repeat: -1       // Repetir indefinidamente
+            });
+
+    </script>
+</body>
+
+</html>
